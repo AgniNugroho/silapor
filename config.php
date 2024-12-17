@@ -6,14 +6,13 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 // init configuration
-$clientID = $_ENV['CLIENT_ID'];
-$clientSecret = $_ENV['CLIENT_SECRET'];
+
 $redirectUri = 'http://localhost/tes/silapor/redirect.php';
 
 // create Client Request to access Google API
 $client = new Google_Client();
-$client->setClientId($clientID);
-$client->setClientSecret($clientSecret);
+$client->setClientId($_ENV['CLIENT_ID']);
+$client->setClientSecret($_ENV['CLIENT_SECRET']);
 $client->setRedirectUri($redirectUri);
 $client->addScope("email");
 $client->addScope("profile");
