@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if (password_verify($password, $user['password'])) {
 			$_SESSION['id'] = $user['id_masyarakat'];
 			$_SESSION['username'] = $user['username'];
-			header('Location: index.php');
+			header('Location: dashboard.php');
 		} else {
 			echo '<script>alert("Password salah");</script>';
 		}
@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					<i class="fab fa-facebook-f"></i> Login with Facebook
 				</button>
 				<div class="text-center my-3">OR</div>
-				<form action="#" method="POST">
+				<form action="login.php" method="POST">
 					<div class="mb-3">
 						<label class="form-label" for="email">
 							<i class="fas fa-envelope"></i> Email
@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				</form>
 				<div class="text-center mt-3">
 					Belum Punya Akun?
-					<a class="register-link" href="register.html">Register</a>
+					<a class="register-link" href="register.php">Register</a>
 				</div>
 			</div>
 		</div>

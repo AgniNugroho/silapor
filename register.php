@@ -18,17 +18,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$result = $stmt->get_result();
 
 	if ($password != $confirm_password) {
-		echo 'Password tidak sama';
+		echo '<script>alert("Password tidak sama");</script>';
 	} else {
 		if ($result->num_rows > 0) {
-			echo 'Email sudah terdaftar';
+			echo '<script>alert("Email sudah terdaftar");</script>';
 		} else {
 			$stmt = $conn->prepare('INSERT INTO masyarakat (username, nama_masyarakat, email, password) VALUES (?, ?, ?, ?)');
 			$stmt->bind_param('ssss', $username, $fullname, $email, $hashedPassword);
 			if ($stmt->execute()) {
 				echo '<script>alert("Registrasi berhasil");window.location.replace("login.php");</script>';
 			} else {
-				echo '<script>alert("Error: ' . $stmt->error; . '");</script>';
+				echo '<script>alert("Error: ;$stmt->error");</script>';
 			}
 		}
 	}
@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					Welcome to
 					<span> SILAPOR </span>
 				</h1>
-				<form>
+				<form action="register.php" method="POST">
 					<div class="mb-3">
 						<label class="form-label" for="username">
 							<i class="fas fa-user"> </i>
@@ -196,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					<div class="login-link">
 						<p>
 							Sudah Memiliki Akun?
-							<a href="login.html"> Login </a>
+							<a href="login.php"> Login </a>
 						</p>
 					</div>
 				</form>
