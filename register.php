@@ -1,3 +1,40 @@
+<?php
+session_start();
+include 'config.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	$username = $_POST['username'];
+	$fullname = $_POST['fullname'];
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+	$confirm_password = $_POST['confirm_password'];
+
+	$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+	$stmt = $conn->prepare('SELECT * FROM masyarakat WHERE email = ?');
+	$stmt->bind_param('s', $email);
+	$stmt->execute();
+	
+	$result = $stmt->get_result();
+
+	if ($password != $confirm_password) {
+		echo 'Password tidak sama';
+	} else {
+		if ($result->num_rows > 0) {
+			echo 'Email sudah terdaftar';
+		} else {
+			$stmt = $conn->prepare('INSERT INTO masyarakat (username, nama_masyarakat, email, password) VALUES (?, ?, ?, ?)');
+			$stmt->bind_param('ssss', $username, $fullname, $email, $hashedPassword);
+			if ($stmt->execute()) {
+				echo '<script>alert("Registrasi berhasil");window.location.replace("login.php");</script>';
+			} else {
+				echo '<script>alert("Error: ' . $stmt->error; . '");</script>';
+			}
+		}
+	}
+}
+?>
+
 <html>
 	<head>
 		<meta charset="utf-8" />
@@ -93,6 +130,8 @@
 							id="username"
 							placeholder="Lidzi"
 							type="text"
+							name="username"
+							required
 						/>
 					</div>
 					<div class="mb-3">
@@ -105,6 +144,8 @@
 							id="fullname"
 							placeholder="Lidzi Gaming Bika Ambon"
 							type="text"
+							name="fullname"
+							required
 						/>
 					</div>
 					<div class="mb-3">
@@ -117,6 +158,8 @@
 							id="email"
 							placeholder="example@gmail.com"
 							type="email"
+							name="email"
+							required
 						/>
 					</div>
 					<div class="mb-3">
@@ -129,6 +172,8 @@
 							id="password"
 							placeholder="********"
 							type="password"
+							name="password"
+							required
 						/>
 					</div>
 					<div class="mb-3">
@@ -141,6 +186,8 @@
 							id="confirm-password"
 							placeholder="********"
 							type="password"
+							name="confirm_password"
+							required
 						/>
 					</div>
 					<button class="btn btn-primary w-100" type="submit">
