@@ -5,14 +5,11 @@ require_once 'vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-// init configuration
-$redirectUri = 'http://localhost/tes/silapor/redirect.php';
-
 // create Client Request to access Google API
 $client = new Google_Client();
 $client->setClientId($_ENV['CLIENT_ID']);
 $client->setClientSecret($_ENV['CLIENT_SECRET']);
-$client->setRedirectUri($redirectUri);
+$client->setRedirectUri($_ENV['REDIRECT_URI']);
 $client->addScope("email");
 $client->addScope("profile");
 
