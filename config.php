@@ -6,7 +6,6 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 // init configuration
-
 $redirectUri = 'http://localhost/tes/silapor/redirect.php';
 
 // create Client Request to access Google API
