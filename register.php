@@ -149,7 +149,7 @@
 					<div class="login-link">
 						<p>
 							Sudah Memiliki Akun?
-							<a href="#"> Login </a>
+							<a href="login.html"> Login </a>
 						</p>
 					</div>
 				</form>
