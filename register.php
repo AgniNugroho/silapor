@@ -106,14 +106,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	</head>
 	<body>
 		<div class="container">
-			<div class="image-container">
+			<!-- <div class="image-container">
 				<img
 					alt="Logo"
 					height="300"
 					src="https://storage.googleapis.com/a1aa/image/Nf8xbhVXuU20QyzQP8AEAgJtHCSz0yMrXwMXHp3OGnWcI59JA.jpg"
 					width="300"
 				/>
-			</div>
+			</div> -->
 			<div class="form-container">
 				<h1>
 					Welcome to

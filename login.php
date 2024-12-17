@@ -1,6 +1,7 @@
 <?php
-session_start();
+
 include 'config.php';
+include 'redirect.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$email = $_POST['email'];
@@ -114,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		</style>
 	</head>
 	<body>
-		<div class="login-container">
+		<!-- <div class="login-container">
 			<div class="login-image">
 				<img
 					alt="Logo"
@@ -122,16 +123,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					src="https://storage.googleapis.com/a1aa/image/Nf8xbhVXuU20QyzQP8AEAgJtHCSz0yMrXwMXHp3OGnWcI59JA.jpg"
 					width="300"
 				/>
-			</div>
+			</div> -->
 			<div class="login-form">
 				<h2>Welcome to <span>SILAPOR</span></h2>
-				<button class="btn btn-google btn-block">
-					<i class="fab fa-google"></i> Login with Google
-				</button>
-				<button class="btn btn-facebook btn-block">
-					<i class="fab fa-facebook-f"></i> Login with Facebook
-				</button>
-				<div class="text-center my-3">OR</div>
 				<form action="login.php" method="POST">
 					<div class="mb-3">
 						<label class="form-label" for="email">
@@ -180,6 +174,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					Belum Punya Akun?
 					<a class="register-link" href="register.php">Register</a>
 				</div>
+				<div class="text-center my-3">OR</div>
+				<button class="btn btn-google btn-block" onclick="location.href='<?php echo $url; ?>'">
+						<i class="fab fa-google"></i> Login with Google
+					</button>
 			</div>
 		</div>
 	</body>
