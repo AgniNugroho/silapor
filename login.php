@@ -137,6 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 							placeholder="example@gmail.com"
 							type="email"
 							name="email"
+							required
 						/>
 					</div>
 					<div class="mb-3">
@@ -149,6 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 							placeholder="********"
 							type="password"
 							name="password"
+							required
 						/>
 					</div>
 					<div
