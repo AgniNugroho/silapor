@@ -1,6 +1,7 @@
 <?php
-session_start();
+
 include 'config.php';
+include 'redirect.php';
 
 if (!isset($_SESSION['id'])) {
 	header('Location: login.php');
@@ -18,5 +19,6 @@ if (!isset($_SESSION['id'])) {
 		<p>
 			Halo, <?php echo $_SESSION['username']; ?>
 		</p>
+		<a href="logout.php">Logout</a>
 	</body>
 </html>
