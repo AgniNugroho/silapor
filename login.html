@@ -1,0 +1,148 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+		<title>Login Page</title>
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="assets/css/all.min.css" rel="stylesheet" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			body {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				background-color: #f8f9fa;
+				font-family: "Poppins", sans-serif;
+			}
+			.login-container {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.login-image {
+				margin-right: 2rem;
+			}
+			.login-image img {
+				max-width: 100%;
+				height: auto;
+			}
+			.login-form {
+				max-width: 400px;
+				width: 100%;
+			}
+			.login-form h2 {
+				font-size: 1.5rem;
+				margin-bottom: 1rem;
+			}
+			.login-form h2 span {
+				display: block;
+				color: #6c63ff;
+				font-size: 2rem;
+				font-weight: bold;
+			}
+			.btn-google {
+				background-color: #fff;
+				color: #000;
+				border: 1px solid #ddd;
+				margin-bottom: 1rem;
+				width: 100%;
+			}
+			.btn-facebook {
+				background-color: #fff;
+				color: #000;
+				border: 1px solid #ddd;
+				margin-bottom: 1rem;
+				width: 100%;
+			}
+			.btn-login {
+				background-color: #6c63ff;
+				color: #fff;
+				border: none;
+				width: 100%;
+			}
+			.form-check-label {
+				margin-left: 0.5rem;
+			}
+			.forgot-password {
+				color: #6c63ff;
+				text-decoration: none;
+			}
+			.register-link {
+				color: #6c63ff;
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="login-container">
+			<!-- <div class="login-image">
+				<img
+					alt="Logo"
+					height="300"
+					src="https://storage.googleapis.com/a1aa/image/Nf8xbhVXuU20QyzQP8AEAgJtHCSz0yMrXwMXHp3OGnWcI59JA.jpg"
+					width="300"
+				/>
+			</div> -->
+			<div class="login-form">
+				<h2>Welcome to <span>SILAPOR</span></h2>
+				<button class="btn btn-google btn-block">
+					<i class="fab fa-google"></i> Login with Google
+				</button>
+				<button class="btn btn-facebook btn-block">
+					<i class="fab fa-facebook-f"></i> Login with Facebook
+				</button>
+				<div class="text-center my-3">OR</div>
+				<form action="#" method="POST">
+					<div class="mb-3">
+						<label class="form-label" for="email">
+							<i class="fas fa-envelope"></i> Email
+						</label>
+						<input
+							class="form-control"
+							id="email"
+							placeholder="example@gmail.com"
+							type="email"
+						/>
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="password">
+							<i class="fas fa-key"></i> Password
+						</label>
+						<input
+							class="form-control"
+							id="password"
+							placeholder="********"
+							type="password"
+						/>
+					</div>
+					<div
+						class="d-flex justify-content-between align-items-center mb-3"
+					>
+						<div class="form-check">
+							<input
+								class="form-check-input"
+								id="rememberMe"
+								type="checkbox"
+							/>
+							<label class="form-check-label" for="rememberMe"
+								>Remember me</label
+							>
+						</div>
+						<a class="forgot-password" href="#">Forgot Password?</a>
+					</div>
+					<button class="btn btn-login btn-block" type="submit">
+						Login
+					</button>
+				</form>
+				<div class="text-center mt-3">
+					Belum Punya Akun?
+					<a class="register-link" href="register.html">Register</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
