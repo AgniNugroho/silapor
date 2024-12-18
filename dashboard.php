@@ -24,15 +24,21 @@ if (!isset($_SESSION['id'])) {
 			body {
 				font-family: "Poppins", sans-serif;
 				background-color: #ffffff;
-				color: #000000;
+				color: #333333;
 			}
 			.navbar {
 				padding: 1rem 2rem;
 				background-color: #ffffff;
 			}
+			.navbar span {
+				color: #6c63ff; /* Adjust the font size as needed */
+			}
 			.navbar-brand {
 				font-weight: bold;
 				font-size: 2rem; /* Adjust the font size as needed */
+			}
+			.navbar-brand a {
+				color: #6c63ff
 			}
 			.navbar-nav .nav-link {
 				margin-right: 1rem;
@@ -46,7 +52,7 @@ if (!isset($_SESSION['id'])) {
 				height: auto;
 			}
 			.btn-primary {
-				background-color: #000000;
+				background-color: #333333;
 				border: none;
 				padding: 0.75rem 1.5rem;
 				font-size: 1rem;
@@ -86,7 +92,7 @@ if (!isset($_SESSION['id'])) {
 				margin-bottom: 0.5rem;
 			}
 			.btn-outline-dark {
-				border: 1px solid #000000;
+				border: 1px solid #333333;
 			}
 			.review-card {
 				display: flex;
@@ -116,11 +122,14 @@ if (!isset($_SESSION['id'])) {
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light">
-			<a class="navbar-brand" href="#"> SILAPOR </a>
+			<span><a class="navbar-brand" href="dashboard.php"> SILAPOR </a></span>
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="#"> Cek Status </a>
+						<a class="nav-link" href="map.php"> Peta Interaktif </a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="statusCheck"> Cek Status </a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#review"> Testimonial </a>
@@ -148,7 +157,7 @@ if (!isset($_SESSION['id'])) {
 					Laporkan segala bentuk masalah yang mengganggu kegiatan
 					dijalankan seluruh Indonesia
 				</p>
-				<button class="btn btn-primary">Laporkan Sekarang!</button>
+				<button class="btn btn-primary" onClick="location.href='lapor.php'">Laporkan Sekarang!</button>
 			</div>
 			<div class="col-md-6 text-end">
 				<img
@@ -464,10 +473,8 @@ if (!isset($_SESSION['id'])) {
 		</section>
 		<footer class="footer">
 			<div class="container">
-				<h5>SILAPOR</h5>
 				<p>Contact Us</p>
-				<p>Email: support@silapor.com</p>
-				<p>Phone: +62 123 4567 890</p>
+				<p>Email: support@silapor.com | Phone: +62 123 4567 890</p>
 				<p>Address: Jl. Merdeka No. 123, Jakarta, Indonesia</p>
 				<p class="mt-3">© 2023 SILAPOR. All rights reserved.</p>
 			</div>

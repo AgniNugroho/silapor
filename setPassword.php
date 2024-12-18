@@ -3,6 +3,10 @@
 include 'config.php';
 include 'redirect.php';
 
+if (!isset($_SESSION['id'])) {
+	header('Location: login.php');
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$password = $_POST['password'];
 	$confirm_password = $_POST['confirm_password'];

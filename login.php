@@ -69,11 +69,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				font-size: 1.5rem;
 				margin-bottom: 1rem;
 			}
-			.login-form h2 span {
+			.login-form .logo {
 				display: block;
 				color: #6c63ff;
 				font-size: 2rem;
 				font-weight: bold;
+				text-decoration: none;
+			}
+			.login-form .logo :hover {
+				cursor: pointer;
 			}
 			.btn-google {
 				background-color: #fff;
@@ -125,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				/>
 			</div> -->
 			<div class="login-form">
-				<h2>Welcome to <span>SILAPOR</span></h2>
+				<h2>Welcome to <a class="logo" href="adminLogin.php">SILAPOR</a></h2>
 				<form action="login.php" method="POST">
 					<div class="mb-3">
 						<label class="form-label" for="email">
