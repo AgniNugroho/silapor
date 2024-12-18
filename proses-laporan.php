@@ -21,8 +21,14 @@ if (!isset($_FILES['foto']['tmp_name'])) {
 	$stmt->execute();
     $stmt->close();
 
-    $image = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
-	mysqli_query($conn, "UPDATE pengaduan SET foto='$image' WHERE id_masyarakat = " . $_SESSION['id']);
+    $image_size = $_FILES['foto']['size'];
+    if ($image_size > 2097152) {
+        echo '<script>alert("Ukuran gambar terlalu besar. Maksimal 2MB");</script>';
+        exit();
+    } else {
+        $image = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+        mysqli_query($conn, "UPDATE pengaduan SET foto='$image' WHERE id_masyarakat = " . $_SESSION['id']);
+    }
 	$conn->close();
     header('Location: dashboard.php');
 }
