@@ -6,6 +6,38 @@ include 'redirect.php';
 if (!isset($_SESSION['id'])) {
 	header('Location: login.php');
 }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	if (!isset($_FILES['foto']['tmp_name'])) {
+		echo '<script>alert("Foto tidak boleh kosong");</script>';
+	} else {
+		$judul = $_POST['judul'];
+		$tanggal = $_POST['tanggal'];
+		$isi = $_POST['isi'];
+		$longitude = $_POST['longitude'];
+		$latitude = $_POST['latitude'];
+		$kategori = $_POST['kategori'];
+		
+		$stmt = $conn->prepare('INSERT INTO pengaduan (judul_pengaduan, tanggal_pengaduan, isi_pengaduan, longitude, latitude, id_kategori, id_masyarakat) VALUES (?, ?, ?, ?, ?, ?, ?)');
+		$stmt->bind_param('sssssii', $judul, $tanggal, $isi, $longitude, $latitude, $kategori, $_SESSION['id']);
+		$stmt->execute();
+		$stmt->close();
+	
+		$image_size = $_FILES['foto']['size'];
+		if ($image_size > 2097152) {
+			echo '<script>alert("Ukuran gambar terlalu besar. Maksimal 2MB");</script>';
+			exit();
+		} else {
+			$image = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+			mysqli_query($conn, "UPDATE pengaduan SET foto='$image' WHERE id_masyarakat = " . $_SESSION['id']);
+		}
+		$conn->close();
+		$habis_kirim = true;
+		$_SESSION['habis_kirim'] = $habis_kirim;
+		header('Location: lapor.php');
+	}
+}
+
 ?>
 
 <html lang="en">
@@ -112,13 +144,13 @@ if (!isset($_SESSION['id'])) {
 						<a class="nav-link" href="map.php"> Peta Interaktif </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="statusCheck"> Cek Status </a>
+						<a class="nav-link" href="statusCheck.php"> Cek Status </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#review"> Testimonial </a>
+						<a class="nav-link" href="dashboard.php#review"> Testimonial </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#faqAccordion1"> FAQ </a>
+						<a class="nav-link" href="dashboard.php#faqAccordion1"> FAQ </a>
 					</li>
 					<li class="nav-item dropdown">
 						<div class="dropdown">
@@ -148,7 +180,7 @@ if (!isset($_SESSION['id'])) {
 		</nav>
 		<div class="form-container">
 			<h1>Buat Laporan</h1>
-			<form class="row g-3" action="proses-laporan.php" method="POST" enctype="multipart/form-data">
+			<form class="row g-3" action="lapor.php" method="POST" enctype="multipart/form-data">
 				<div class="col-md-6">
 					<label for="judul" class="form-label"
 						>Judul Laporan</label
@@ -242,7 +274,7 @@ if (!isset($_SESSION['id'])) {
 					/>
 				</div>
 				<div class="col-md-3">
-					<button type="submit" class="btn btn-primary">
+					<button type="submit" class="btn btn-primary" id="liveToastBtn">
 						Submit
 					</button>
 				</div>
@@ -269,6 +301,6 @@ if (!isset($_SESSION['id'])) {
 			});
 		</script>
 		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-		<script src="map.js"></script>
+		<script src="map-config.js"></script>
 	</body>
 </html>

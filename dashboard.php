@@ -6,6 +6,9 @@ include 'redirect.php';
 if (!isset($_SESSION['id'])) {
  header('Location: login.php');
 }
+
+$habis_kirim = false;
+$_SESSION['habis_kirim'] = $habis_kirim;
 ?>
 
 <html lang="en">
@@ -129,7 +132,7 @@ if (!isset($_SESSION['id'])) {
 						<a class="nav-link" href="map.php"> Peta Interaktif </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="statusCheck"> Cek Status </a>
+						<a class="nav-link" href="statusCheck.php"> Cek Status </a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#review"> Testimonial </a>
