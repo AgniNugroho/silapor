@@ -34,7 +34,7 @@ include 'redirect.php';
 			src="https://cdn.tiny.cloud/1/owzelfxv545o6js959rr14vltcorvd0ccthzbxzjdeon978f/tinymce/7/tinymce.min.js"
 			referrerpolicy="origin"
 		></script>
-		<style>
+        <style>
 			body {
 				display: flex;
 				justify-content: center;
@@ -104,7 +104,7 @@ include 'redirect.php';
 		</style>
 	</head>
 	<body>
-		<nav class="navbar fixed-top navbar-expand-lg navbar-light">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light">
 			<span
 				><a class="navbar-brand" href="dashboard.php">
 					SILAPOR
@@ -113,10 +113,10 @@ include 'redirect.php';
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="map.php"> Peta Interaktif </a>
+						<a class="nav-link active" href="map.php"> Peta Interaktif </a>
 					</li>
 					<li class="nav-item"> 	
-						<a class="nav-link active" href="statusCheck.php">
+						<a class="nav-link" href="statusCheck.php">
 							Cek Status
 						</a>
 					</li>
@@ -156,54 +156,29 @@ include 'redirect.php';
 				</ul>
 			</div>
 		</nav>
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Judul</th>
-					<th scope="col">Isi Laporan</th>
-					<th scope="col">Tanggal</th>
-					<th scope="col">Lokasi</th>
-					<th scope="col">Status Laporan</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php
-				$no = 1;
-				$id = $_SESSION['id'];
-				$query = "SELECT * FROM pengaduan JOIN petugas ON pengaduan.id_petugas = petugas.id_petugas WHERE id_masyarakat = '$id'";
-				$result = mysqli_query($conn, $query);
-				while ($row = mysqli_fetch_array($result)) {
-					?>
-					<tr>
-						<?php
-						$lokasi = "https://www.google.com/maps/search/?api=1&query=" . $row['latitude'] . "," . $row['longitude'];
-						?>
-						<th scope="row"><?php echo $no++; ?></th>
-						<td><?php echo $row['judul_pengaduan']; ?></td>
-						<td><?php echo $row['isi_pengaduan']; ?></td>
-						<td><?php echo $row['tanggal_pengaduan']; ?></td>
-						<td><a href="<?php echo $lokasi?>">Lihat di Google Maps</a></td>
-						<?php
-						if ($row['status'] == '0') {
-							?>
-							<td><span class="badge rounded-pill bg-danger">Ditolak</span></td>
-							<?php
-						} else if ($row['status'] == 'proses') {
-							?>
-							<td><span class="badge rounded-pill bg-warning text-dark">Diproses</span><p></td>
-							<?php
-						} else {
-							?>
-							<td><span class="badge rounded-pill bg-success">Diterima</span> oleh <?php echo $row['nama_petugas']; ?></td>
-							<?php
-						}
-						?>
-					</tr>
-					<?php
-				}
-				?>
-			</tbody>
-		</table>
+        <div id="map" style="width: 100%; height: 100vh"></div>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+		<script>
+            let mapOptions = {
+	           center: [-7.811684223567514, 110.37277221679689],
+	            zoom: 10,
+            };
+
+            let map = new L.map("map", mapOptions);
+            let layer = new L.TileLayer(
+	            "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            );
+            
+            map.addLayer(layer);
+
+            <?php
+            $query = "SELECT * FROM pengaduan JOIN kategori ON pengaduan.id_kategori = kategori.id_kategori WHERE status = 'selesai'";
+            $result = mysqli_query($conn, $query);
+
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo 'L.marker([' . $row['latitude'] . ', ' . $row['longitude'] . ']).addTo(map).bindPopup("' . $row['nama_kategori'] . '");';
+            }
+            ?>
+        </script>
 	</body>
 </html>
