@@ -1,28 +1,27 @@
 <?php
-
-include 'config.php';
-include 'redirect.php';
+session_start();
+include '../config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$email = $_POST['email'];
+	$username = $_POST['username'];
 	$password = $_POST['password'];
 
-	$stmt = $conn->prepare('SELECT * FROM masyarakat WHERE email = ?');
-	$stmt->bind_param('s', $email);
+	$stmt = $conn->prepare('SELECT * FROM petugas WHERE username = ?');
+	$stmt->bind_param('s', $username);
 	$stmt->execute();
 	$result = $stmt->get_result();
 
 	if ($result->num_rows > 0) {
-		$user = $result->fetch_assoc();
-		if (password_verify($password, $user['password'])) {
-			$_SESSION['id'] = $user['id_masyarakat'];
-			$_SESSION['username'] = $user['username'];
+		$admin = $result->fetch_assoc();
+		if (password_verify($password, $admin['password'])) {
+			$_SESSION['id'] = $admin['id_petugas'];
+			$_SESSION['username'] = $admin['username'];
 			header('Location: dashboard.php');
 		} else {
 			echo '<script>alert("Password salah");</script>';
 		}
 	} else {
-		echo '<script>alert("Email tidak terdaftar");</script>';
+		echo '<script>alert("Username tidak terdaftar");</script>';
 	}
 	$stmt->close();
 	$conn->close();
@@ -33,9 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<head>
 		<meta charset="utf-8" />
 		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-		<title>Login</title>
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link href="assets/css/all.min.css" rel="stylesheet" />
+		<title>Admin Login</title>
+		<link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="../assets/css/all.min.css" rel="stylesheet" />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
 			rel="stylesheet"
@@ -129,18 +128,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				/>
 			</div> -->
 			<div class="login-form">
-				<h2>Welcome to <a class="logo" href="admin/login.php">SILAPOR</a></h2>
+				<h2>Admin Login <a class="logo" href="../login.php">SILAPOR</a></h2>
 				<form action="login.php" method="POST">
 					<div class="mb-3">
-						<label class="form-label" for="email">
-							<i class="fas fa-envelope"></i> Email
+						<label class="form-label" for="username">
+							<i class="fas fa-user"></i> Username
 						</label>
 						<input
 							class="form-control"
-							id="email"
-							placeholder="example@gmail.com"
-							type="email"
-							name="email"
+							id="username"
+							type="username"
+							name="username"
 							required
 						/>
 					</div>
@@ -151,7 +149,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						<input
 							class="form-control"
 							id="password"
-							placeholder="********"
 							type="password"
 							name="password"
 							required
@@ -176,14 +173,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						Login
 					</button>
 				</form>
-				<div class="text-center mt-3">
-					Belum Punya Akun?
-					<a class="register-link" href="register.php">Register</a>
-				</div>
-				<div class="text-center my-3">OR</div>
-				<button class="btn btn-google btn-block" onclick="location.href='<?php echo $url; ?>'">
-						<i class="fab fa-google"></i> Login with Google
-					</button>
 			</div>
 		</div>
 	</body>
