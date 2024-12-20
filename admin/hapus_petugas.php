@@ -12,5 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->close();
     $conn->close();
     header('Location: petugas.php');
+} else {
+    exit("Halaman hanya bisa diakses melalui POST method!");
 }
 ?>
