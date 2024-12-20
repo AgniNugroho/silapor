@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if (password_verify($password, $admin['password'])) {
 			$_SESSION['id'] = $admin['id_petugas'];
 			$_SESSION['username'] = $admin['username'];
+			$_SESSION['level'] = $admin['level'];
 			header('Location: dashboard.php');
 		} else {
 			echo '<script>alert("Password salah");</script>';

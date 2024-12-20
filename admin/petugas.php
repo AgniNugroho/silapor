@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include "../config.php"
 ?>
 
@@ -95,8 +96,14 @@
     <div class="content" id="content">
 
         <button class="btn btn-custom mb-3" id="toggleSidebar"><i class="fas fa-bars"></i></button>
-        <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal"">Tambah Petugas</button>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <?php
+        if ($_SESSION['level'] == 'admin') {
+            ?>
+            <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#tambahModal">Tambah Petugas</button>
+            <?php
+        }
+        ?>
+        <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -145,7 +152,13 @@
                         <th scope="col">Email</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Level</th>
-                        <th scope="col">Aksi</th>
+                        <?php
+                        if ($_SESSION['level'] == 'admin') {
+                            ?>
+                            <th scope="col">Aksi</th>
+                            <?php
+                        }
+                        ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -158,11 +171,132 @@
                         <tr>
                             <th scope="row"><?php echo $no++; ?></th>
                             <td><?php echo $row['id_petugas']; ?></td>
-                            <td><?php echo $row['username']; ?></td>
+                            <?php
+                            if ($_SESSION['id'] == $row['id_petugas']) {
+                                ?>
+                                <td><?php echo $row['username']; ?> (saya)</td>
+                                <?php
+                            } else {
+                                ?>
+                                <td><?php echo $row['username']; ?></td>
+                                <?php
+                            }
+                            ?>
                             <td><?php echo $row['email']; ?></td>
-                            <td><?php echo $row['nama_petugas']; ?></td>
+                            <td><?php echo $row['nama_petugas']; ?></td>    
                             <td><?php echo $row['level']; ?></td>
-                            <TD></TD>
+                            <?php
+                            if ($_SESSION['level'] == 'admin') {
+                                ?>
+                                <td>
+                                    <button class="btn btn-warning mb-3" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $row['id_petugas']; ?>">Edit</button>
+                                    <div class="modal fade" id="editModal<?php echo $row['id_petugas']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Petugas</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="edit_petugas.php" method="POST">
+                                                        <div class="mb-3">
+                                                            <label for="id" class="form-label">Id</label>
+                                                            <input type="text" class="form-control-plaintext" id="id" name="id" value="<?php echo $row['id_petugas']; ?>" readonly>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="username" class="form-label">Username</label>
+                                                            <input type="text" class="form-control" id="username" name="username" value="<?php echo $row['username']; ?>">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="password" class="form-label">Password</label>
+                                                            <input type="password" class="form-control" id="password" name="password">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="email" class="form-label">Email</label>
+                                                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $row['email']; ?>">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="nama" class="form-label">Nama</label>
+                                                            <input type="text" class="form-control" id="nama" name="nama" value="<?php echo $row['nama_petugas']; ?>">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="level" class="form-label">Level</label>
+                                                            <select class="form-select" id="level" name="level">
+                                                                <option value="admin">Admin</option>
+                                                                <option value="petugas">Petugas</option>
+                                                            </select>
+                                                        </div>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-success">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                    if ($row['level'] != 'admin') {
+                                        ?>
+                                        <button class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#hapusModal<?php echo $row['id_petugas']; ?>">Hapus</button>
+                                    <?php
+                                    }
+                                    ?>
+                                    <div class="modal fade" id="hapusModal<?php echo $row['id_petugas']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Hapus Petugas</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="hapus_petugas.php" method="POST">
+                                                        <form action="hapus_petugas.php" method="POST">
+                                                            <div class="mb-3">
+                                                                <p>Apakah anda yakin ingin menghapus akun berikut: </p>
+                                                            </div>
+                                                            <div class="row g-3 align-items-center">
+                                                                <div class="col-auto mb-3">
+                                                                    <label for="id" class="form-label">Id: </label>
+                                                                </div>
+                                                                <div class="col-auto mb-3">
+                                                                    <input type="text" class="form-control" id="id" name="id" value="<?php echo $row['id_petugas']; ?>" aria-describedby="textHelpInline" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row g-3 align-items-center">
+                                                                <div class="col-auto mb-3">
+                                                                    <label for="id" class="form-label">Username: </label>
+                                                                </div>
+                                                                <div class="col-auto mb-3">
+                                                                    <input type="text" class="form-control" id="username" name="username" value="<?php echo $row['username']; ?>" aria-describedby="textHelpInline" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row g-3 align-items-center">
+                                                                <div class="col-auto mb-3">
+                                                                    <label for="id" class="form-label">Email: </label>
+                                                                </div>
+                                                                <div class="col-auto mb-3">
+                                                                    <input type="text" class="form-control" id="email" name="email" value="<?php echo $row['email']; ?>" aria-describedby="textHelpInline" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row g-3 align-items-center">
+                                                                <div class="col-auto mb-3">
+                                                                    <label for="id" class="form-label">Level: </label>
+                                                                </div>
+                                                                <div class="col-auto mb-3">
+                                                                    <input type="text" class="form-control" id="id" name="id" value="<?php echo $row['level']; ?>" aria-describedby="textHelpInline" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                        </form>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <?php
+                            }
+                            ?>
                         </tr>
                         <?php
                     }
