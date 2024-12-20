@@ -65,7 +65,7 @@
 </head>
 <body>
     <div class="sidebar" id="sidebar">
-        <h3 class="text-center py-3">Admin Dashboard</h3>
+        <h3 class="text-center py-3">Hai, <?php echo $_SESSION['username']; ?>!</h3>
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link" href="dashboard.php">
@@ -94,7 +94,6 @@
         </ul>
     </div>
     <div class="content" id="content">
-
         <button class="btn btn-custom mb-3" id="toggleSidebar"><i class="fas fa-bars"></i></button>
         <?php
         if ($_SESSION['level'] == 'admin') {
