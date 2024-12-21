@@ -15,8 +15,8 @@ https://getcomposer.org/download/
 ## 6. Di dalam folder silapor-main, tekan shift + klik kanan, lalu pilih open in terminal
 
 ## 7. Masukkan command berikut
-composer require google/apiclient
-composer require vlucas/phpdotenv
+- composer require google/apiclient
+- composer require vlucas/phpdotenv
 
 ## 8. Buat file .env
 
