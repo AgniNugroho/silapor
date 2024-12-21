@@ -86,6 +86,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="kategori.php">
+                    <div class="icon"><i class="fas fa-hashtag"></i></div>
+                    Kategori
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="../logout.php">
                     <div class="icon"><i class="fas fa-sign-out-alt"></i></div>
                     Logout

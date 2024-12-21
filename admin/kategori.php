@@ -1,11 +1,11 @@
 <?php
-session_start();
-include "../config.php"
+    session_start();
+    include "../config.php"
 ?>
 
 <html>
 <head>
-    <title>Admin Dashboard</title>
+    <title>Admin: Petugas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
     <style>
@@ -74,7 +74,7 @@ include "../config.php"
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="#">
+                <a class="nav-link" href="laporan.php">
                     <div class="icon"><i class="fas fa-file-alt"></i></div>
                     Laporan
                 </a>
@@ -86,7 +86,7 @@ include "../config.php"
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="kategori.php">
+                <a class="nav-link active" href="#">
                     <div class="icon"><i class="fas fa-hashtag"></i></div>
                     Kategori
                 </a>
@@ -101,48 +101,60 @@ include "../config.php"
     </div>
     <div class="content" id="content">
         <button class="btn btn-custom mb-3" id="toggleSidebar"><i class="fas fa-bars"></i></button>
-        <table class="table table-bordered">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Judul</th>
-					<th scope="col">Isi Laporan</th>
-                    <th scope="col">Pelapor</th>
-                    <th scope="col">Kategori</th>
-					<th scope="col">Tanggal</th>
-					<th scope="col">Lokasi</th>
-                    <th scope="col">Gambar</th>
-					<th scope="col">Aksi</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php
-				$no = 1;
-				$id = $_SESSION['id'];
-				$query = "SELECT * FROM pengaduan JOIN masyarakat ON masyarakat.id_masyarakat = pengaduan.id_masyarakat JOIN kategori ON kategori.id_kategori = pengaduan.id_kategori WHERE status = 'proses'";
-				$result = mysqli_query($conn, $query);
-				while ($row = mysqli_fetch_array($result)) {
-					?>
-					<tr>
-						<?php
-						$lokasi = "https://www.google.com/maps/search/?api=1&query=" . $row['latitude'] . "," . $row['longitude'];
-						?>
-						<th scope="row"><?php echo $no++; ?></th>
-						<td><?php echo $row['judul_pengaduan']; ?></td>
-						<td><?php echo $row['isi_pengaduan']; ?></td>
-                        <td><?php echo $row['username']; ?></td>
-                        <td><?php echo $row['nama_kategori']; ?></td>
-						<td><?php echo $row['tanggal_pengaduan']; ?></td>
-						<td><a href="<?php echo $lokasi?>">Lihat di Google Maps</a></td>
-                        <td><img src="foto.php?id_pengaduan=<?php echo $row['id_pengaduan']; ?>" alt="Foto" width="100"></td>
-                        <td>
-                            <a href="tolak.php?id_pengaduan=<?php echo $row['id_pengaduan']; ?>" class="btn btn-danger">Tolak</a>
-                            <a href="terima.php?id_pengaduan=<?php echo $row['id_pengaduan']; ?>" class="btn btn-success">Terima</a>
-                        </td>
-                <?php
-                }
-                ?>
-			</tbody>
-		</table>
+        <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#tambahModal">Tambah Kategori</button>
+        <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah Kategori</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="tambah_kategori.php" method="POST">
+                            <div class="mb-3">
+                                <label for="categoryName" class="form-label">Nama Kategori</label>
+                                <input type="text" class="form-control" id="categoryName" name="categoryName">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Kategori</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $no = 1;
+                    $query = "SELECT * FROM kategori";
+                    $result = mysqli_query($conn, $query);
+                    while ($row = mysqli_fetch_array($result)) {
+                        ?>
+                        <tr>
+                            <th scope="row"><?php echo $no++; ?></th>
+                            <td><?php echo $row['nama_kategori']; ?></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('toggleSidebar').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+            document.getElementById('content').classList.toggle('expanded');
+        });
+    </script>
 </body>
+</html>
