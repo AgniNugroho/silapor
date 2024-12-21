@@ -1,23 +1,23 @@
 # SiLapor
-### Cara Install:
+## Cara Install:
 
-## 1. Instal Composer
+### 1. Instal Composer
 https://getcomposer.org/download/
 
-## 2. Clone Repo
+### 2. Clone Repo
 
-## 3. Import Database
+### 3. Import Database
 
-## 4. Pindahkan folder hasil clone ke folder htdocs
+### 4. Pindahkan folder hasil clone ke folder htdocs
 
-## 5. Hapus folder vendor, file composer.lock dan composer.json
+### 5. Hapus folder vendor, file composer.lock dan composer.json
 
-## 6. Di dalam folder silapor-main, tekan shift + klik kanan, lalu pilih open in terminal
+### 6. Di dalam folder silapor-main, tekan shift + klik kanan, lalu pilih open in terminal
 
-## 7. Masukkan command berikut
+### 7. Masukkan command berikut
 - composer require google/apiclient
 - composer require vlucas/phpdotenv
 
-## 8. Buat file .env
+### 8. Buat file .env
 
-## 9. Jalankan uhuyyy!!!
+### 9. Jalankan uhuyyy!!!
