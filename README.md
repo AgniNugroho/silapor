@@ -1,7 +1,7 @@
 # SiLapor
 ## Cara Install:
 
-### 1. Instal Composer
+### 1. Install Composer
 https://getcomposer.org/download/
 
 ### 2. Clone Repo
