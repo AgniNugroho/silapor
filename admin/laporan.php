@@ -1,6 +1,10 @@
 <?php
 session_start();
-include "../config.php"
+include "../config.php";
+
+if (!isset($_SESSION['id'])) {
+    header('Location: login.php');
+}
 ?>
 
 <html>
