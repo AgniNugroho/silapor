@@ -101,6 +101,12 @@ include 'redirect.php';
 				text-align: center;
 				margin-top: 0px;
 			}
+			h1 {
+				font-size: 1rem;
+			}
+			h2 {
+				font-size: 0.8rem;
+			}
 		</style>
 	</head>
 	<body>
@@ -122,7 +128,7 @@ include 'redirect.php';
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="dashboard.php#review">
-							Testimonial
+							Aduan Masyarakat
 						</a>
 					</li>
 					<li class="nav-item">
@@ -172,11 +178,11 @@ include 'redirect.php';
             map.addLayer(layer);
 
             <?php
-            $query = "SELECT * FROM pengaduan JOIN kategori ON pengaduan.id_kategori = kategori.id_kategori WHERE status = 'selesai'";
+            $query = "SELECT * FROM pengaduan JOIN kategori ON pengaduan.id_kategori = kategori.id_kategori JOIN masyarakat ON pengaduan.id_masyarakat = masyarakat.id_masyarakat WHERE status = 'selesai'";
             $result = mysqli_query($conn, $query);
 
             while ($row = mysqli_fetch_assoc($result)) {
-                echo 'L.marker([' . $row['latitude'] . ', ' . $row['longitude'] . ']).addTo(map).bindPopup("' . $row['nama_kategori'] . '");';
+                echo 'L.marker([' . $row['latitude'] . ', ' . $row['longitude'] . ']).addTo(map).bindPopup("<h1>' . $row['judul_pengaduan'] . '</h1><hr><h2>' . $row['isi_pengaduan'] . ' (' . $row['nama_kategori'] . ')</h2>");';
             }
             ?>
         </script>

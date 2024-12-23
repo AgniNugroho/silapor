@@ -98,8 +98,7 @@ include 'redirect.php';
 				margin: auto;
 			}
 			.judul {
-				text-align: center;
-				margin-top: 0px;
+				
 			}
 		</style>
 	</head>
@@ -122,7 +121,7 @@ include 'redirect.php';
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="dashboard.php#review">
-							Testimonial
+							Aduan Masyarakat
 						</a>
 					</li>
 					<li class="nav-item">

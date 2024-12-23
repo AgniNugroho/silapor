@@ -135,7 +135,7 @@ $_SESSION['habis_kirim'] = $habis_kirim;
 						<a class="nav-link" href="statusCheck.php"> Cek Status </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#review"> Testimonial </a>
+						<a class="nav-link" href="#review"> Aduan Masyarakat </a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#faqAccordion1"> FAQ </a>
@@ -173,144 +173,36 @@ $_SESSION['habis_kirim'] = $habis_kirim;
 		</section>
 		<section class="container my-5" id="review">
 			<div class="row">
-				<div class="col-md-4">
+				<?php
+					$sql = "SELECT * FROM pengaduan JOIN masyarakat ON masyarakat.id_masyarakat = pengaduan.id_masyarakat WHERE status='selesai' ORDER BY id_pengaduan DESC";
+					$result = $conn->query($sql);
+					if ($result->num_rows > 0) {
+						while ($row = $result->fetch_assoc()) {
+							echo '<div class="col-md-4">
 					<div class="card review-card">
 						<div class="card-body">
 							<img
-								alt="Profile picture of Athaya"
+								alt="Profile Picture"
 								class="rounded-circle"
-								src="https://storage.googleapis.com/a1aa/image/yxQL2t2iYQIiEtPf9Rj6REOfUneI1i44NUyTo1p4Ettgy93nA.jpg"
+								src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg"
 							/>
 							<div>
-								<h5 class="card-title">Athaya</h5>
-								<p class="card-text">Pengguna SILAPOR</p>
+								<h5 class="card-title">' . $row['judul_pengaduan'] . '</h5>
+								<p class="card-text">' . $row['nama_masyarakat'] . '</p>
 							</div>
 						</div>
 						<div class="card-body">
 							<div class="review-text">
 								<p class="card-text">
-									Terimakasih SILAPOR telah membantu saya
-									melaporkan masalah di lingkungan saya.
+									' . $row['isi_pengaduan'] . '
 								</p>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card review-card">
-						<div class="card-body">
-							<img
-								alt="Profile picture of Athaya"
-								class="rounded-circle"
-								src="https://storage.googleapis.com/a1aa/image/yxQL2t2iYQIiEtPf9Rj6REOfUneI1i44NUyTo1p4Ettgy93nA.jpg"
-							/>
-							<div>
-								<h5 class="card-title">Athaya</h5>
-								<p class="card-text">Pengguna SILAPOR</p>
-							</div>
-						</div>
-						<div class="card-body">
-							<div class="review-text">
-								<p class="card-text">
-									Terimakasih SILAPOR telah membantu saya
-									melaporkan masalah di lingkungan saya.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card review-card">
-						<div class="card-body">
-							<img
-								alt="Profile picture of Athaya"
-								class="rounded-circle"
-								src="https://storage.googleapis.com/a1aa/image/yxQL2t2iYQIiEtPf9Rj6REOfUneI1i44NUyTo1p4Ettgy93nA.jpg"
-							/>
-							<div>
-								<h5 class="card-title">Athaya</h5>
-								<p class="card-text">Pengguna SILAPOR</p>
-							</div>
-						</div>
-						<div class="card-body">
-							<div class="review-text">
-								<p class="card-text">
-									Terimakasih SILAPOR telah membantu saya
-									melaporkan masalah di lingkungan saya.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card review-card">
-						<div class="card-body">
-							<img
-								alt="Profile picture of Athaya"
-								class="rounded-circle"
-								src="https://storage.googleapis.com/a1aa/image/yxQL2t2iYQIiEtPf9Rj6REOfUneI1i44NUyTo1p4Ettgy93nA.jpg"
-							/>
-							<div>
-								<h5 class="card-title">Athaya</h5>
-								<p class="card-text">Pengguna SILAPOR</p>
-							</div>
-						</div>
-						<div class="card-body">
-							<div class="review-text">
-								<p class="card-text">
-									Terimakasih SILAPOR telah membantu saya
-									melaporkan masalah di lingkungan saya.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card review-card">
-						<div class="card-body">
-							<img
-								alt="Profile picture of Athaya"
-								class="rounded-circle"
-								src="https://storage.googleapis.com/a1aa/image/yxQL2t2iYQIiEtPf9Rj6REOfUneI1i44NUyTo1p4Ettgy93nA.jpg"
-							/>
-							<div>
-								<h5 class="card-title">Athaya</h5>
-								<p class="card-text">Pengguna SILAPOR</p>
-							</div>
-						</div>
-						<div class="card-body">
-							<div class="review-text">
-								<p class="card-text">
-									Terimakasih SILAPOR telah membantu saya
-									melaporkan masalah di lingkungan saya.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card review-card">
-						<div class="card-body">
-							<img
-								alt="Profile picture of Athaya"
-								class="rounded-circle"
-								src="https://storage.googleapis.com/a1aa/image/yxQL2t2iYQIiEtPf9Rj6REOfUneI1i44NUyTo1p4Ettgy93nA.jpg"
-							/>
-							<div>
-								<h5 class="card-title">Athaya</h5>
-								<p class="card-text">Pengguna SILAPOR</p>
-							</div>
-						</div>
-						<div class="card-body">
-							<div class="review-text">
-								<p class="card-text">
-									Terimakasih SILAPOR telah membantu saya
-									melaporkan masalah di lingkungan saya.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				</div>';
+						}
+					}
+				?>
 			</div>
 		</section>
 		<section class="faq-section container my-5">

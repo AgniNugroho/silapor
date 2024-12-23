@@ -3,7 +3,7 @@
 include 'config.php';
 include 'redirect.php';
 
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['email'])) {
 	header('Location: login.php');
 }
 
