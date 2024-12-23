@@ -1,23 +1,9 @@
 # SiLapor
-## Cara Install:
+SILAPOR! bertujuan untuk meningkatkan efisiensi pelaporan masalah lalu lintas melalui sistem pelaporan pengguna yang ramah. Dengan memungkinkan pengguna melaporkan masalah seperti kemacetan, kecelakaan, atau kondisi jalan berbahaya. Sistem ini membantu otoritas menanggapi masalah lebih cepat, memastikan kelancaran transportasi bagi masyarakat.
 
-### 1. Install Composer
-https://getcomposer.org/download/
-
-### 2. Clone Repo
-
-### 3. Import Database
-
-### 4. Pindahkan folder hasil clone ke folder htdocs
-
-### 5. Hapus folder vendor, file composer.lock dan composer.json
-
-### 6. Di dalam folder silapor-main, tekan shift + klik kanan, lalu pilih open in terminal
-
-### 7. Masukkan command berikut
-- composer require google/apiclient
-- composer require vlucas/phpdotenv
-
-### 8. Buat file .env
-
-### 9. Jalankan uhuyyy!!!
+## Anggota:
+### 1. Satrio Leikanov Habibi
+### 2. Laudza Muhammad Anwar Lahiz
+### 3. Ketzha Agni FIrstantyo Nugroho
+### 4. Erfina Safitri
+### 5. Yuvita Indah Althaffy
